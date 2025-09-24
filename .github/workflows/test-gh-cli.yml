@@ -1,0 +1,22 @@
+name: Test GitHub CLI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-gh-cli:
+    runs-on: macos-latest
+
+    steps:
+      - name: Check gh CLI version
+        run: gh --version
+
+      - name: Test gh CLI authentication status
+        run: gh auth status
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Test basic gh CLI functionality
+        run: gh repo view --json name,description
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
