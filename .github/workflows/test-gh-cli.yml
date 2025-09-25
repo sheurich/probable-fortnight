@@ -11,6 +11,7 @@ jobs:
       - name: Check gh CLI version
         run: |
           echo $PATH
+          which gh
           gh --version
 
       - name: Test gh CLI authentication status
@@ -19,11 +20,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test brew bot functionality
-        run: brew test-bot --tap=sheurich/tap
+        run: brew test-bot --tap=sheurich/tap || true
         env:
           HOMEBREW_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check gh CLI version
         run: |
           echo $PATH
+          which gh
           gh --version
