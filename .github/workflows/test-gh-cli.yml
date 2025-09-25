@@ -9,14 +9,21 @@ jobs:
 
     steps:
       - name: Check gh CLI version
-        run: gh --version
+        run: |
+          echo $PATH
+          gh --version
 
       - name: Test gh CLI authentication status
         run: gh auth status
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Test basic gh CLI functionality
-        run: gh repo view --json name,description
+      - name: Test brew bot functionality
+        run: brew test-bot --tap=sheurich/tap
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HOMEBREW_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check gh CLI version
+        run: |
+          echo $PATH
+          gh --version
